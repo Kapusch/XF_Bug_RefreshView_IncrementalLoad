@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="XF_Bug_RefreshView_IncrementalLoad.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    BackgroundColor="Black"
+    mc:Ignorable="d">
+
+    <Grid
+        Margin="5,100"
+        ColumnDefinitions="*"
+        HorizontalOptions="Center"
+        RowDefinitions="*"
+        VerticalOptions="Center">
+        <RefreshView Refreshing="RefreshView_Refreshing">
+            <CollectionView
+                ItemsUpdatingScrollMode="KeepItemsInView"
+                RemainingItemsThreshold="5"
+                RemainingItemsThresholdReached="CollectionView_RemainingItemsThresholdReached"
+                SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout
+                        Orientation="Vertical"
+                        SnapPointsAlignment="Start"
+                        SnapPointsType="Mandatory" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Item n° 1</x:String>
+                        <x:String>Item n° 2</x:String>
+                        <x:String>Item n° 3</x:String>
+                        <x:String>Item n° 4</x:String>
+                    </x:Array>
+                </CollectionView.ItemsSource>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout BackgroundColor="WhiteSmoke">
+                            <Label
+                                FontSize="Title"
+                                HeightRequest="100"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding .}" />
+
+                            <BoxView HeightRequest="2" Color="Black" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>
